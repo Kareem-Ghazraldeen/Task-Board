@@ -1,0 +1,92 @@
+/* General Styling Started */
+:root {
+  --bg-color: #05070f;
+  --bg-task: #0a0f1e;
+  --accent: #38bdf8;
+  --text-color: #cfe8ff;
+  --border-color: #1e3a6e;
+  --addBtn-color: #05131f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Rajdhani", monospace;
+}
+
+/* General Styling Ended */
+/* Unit Styling Started */
+.app {
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.task {
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+  background-color: var(--bg-task);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent);
+}
+
+h1 {
+  text-align: center;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 12px;
+  padding-top: 40px;
+  margin-bottom: 8px;
+}
+
+button {
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  background-color: var(--bg-task);
+  padding: 5px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+  transition: 0.2s;
+}
+button:hover {
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
+  background-color: rgba(56, 189, 248, 0.1);
+  color: var(--text-color);
+}
+input {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  padding: 5px;
+  outline: none;
+  flex: 1;
+}
+.task span {
+  letter-spacing: 1px;
+}
+.task-buttons {
+  display: flex;
+  gap: 8px;
+}
+.add-task {
+  display: flex;
+  gap: 8px;
+}
+.add-btn {
+  background-color: var(--accent);
+  color: var(--addBtn-color);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+  font-weight: 600;
+}
+/* Unit Styling Ended */
