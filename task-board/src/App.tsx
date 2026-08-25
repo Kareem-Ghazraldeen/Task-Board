@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 type Task = {
@@ -10,10 +10,14 @@ export default function App() {
   {
     /* Display Tasks */
   }
-  const [tasks, setTask] = useState([
-    { id: 1, title: "Review Client Report", done: false },
-    { id: 2, title: "Send an Email to the Client ", done: false },
-  ]);
+  const [tasks, setTask] = useState<Task[]>(() => {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem("theme");
+    return saved ? saved : "dark";
+  });
 
   {
     /* Controlled Inputs  */
@@ -56,10 +60,27 @@ export default function App() {
     );
     setEditTaskId(null);
   };
-
+  //  Saving to localStorage
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+  //  Saving to localStorage (Dark/Light Mode)
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  // Dark/Light Mode
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
   return (
     <div className="app">
       {/* Display Tasks */}
+      <button
+        className="theme-btn"
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      >
+        {theme === "dark" ? "☀️ Light" : " 🌙 Dark"}
+      </button>
       <h1>My Tasks</h1>
       <p className="counter">
         {tasks.length} Tasks . {tasks.filter((task) => task.done).length} Done

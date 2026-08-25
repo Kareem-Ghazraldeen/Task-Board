@@ -1,11 +1,19 @@
 /* General Styling Started */
-:root {
+.dark {
   --bg-color: #05070f;
   --bg-task: #0a0f1e;
   --accent: #38bdf8;
   --text-color: #cfe8ff;
   --border-color: #1e3a6e;
   --addBtn-color: #05131f;
+}
+.light {
+  --bg-color: #ffffff;
+  --bg-task: #f8fafc;
+  --accent: #2563eb;
+  --text-color: #1e293b;
+  --border-color: #e2e8f0;
+  --addBtn-color: #ffffff;
 }
 
 * {
