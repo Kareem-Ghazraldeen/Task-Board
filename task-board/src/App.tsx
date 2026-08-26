@@ -14,11 +14,17 @@ export default function App() {
     const saved = localStorage.getItem("tasks");
     return saved ? JSON.parse(saved) : [];
   });
+  // (Dark/Light Mode)
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem("theme");
     return saved ? saved : "dark";
   });
+  // Adding the filter to the local storage:
 
+  const [filter, setFilter] = useState(() => {
+    const saved = localStorage.getItem("filter");
+    return saved ? saved : "all";
+  });
   {
     /* Controlled Inputs  */
   }
@@ -72,6 +78,14 @@ export default function App() {
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
+  useEffect(() => {
+    localStorage.setItem("filter", filter);
+  }, [filter]);
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "active") return !task.done;
+    if (filter === "done") return task.done;
+    return true;
+  });
   return (
     <div className="app">
       {/* Display Tasks */}
@@ -85,10 +99,15 @@ export default function App() {
       <p className="counter">
         {tasks.length} Tasks . {tasks.filter((task) => task.done).length} Done
       </p>
-      {tasks.length === 0 ? (
+      <div className="filter">
+        <button onClick={() => setFilter("all")}>All</button>
+        <button onClick={() => setFilter("active")}>Active</button>
+        <button onClick={() => setFilter("done")}>Done</button>
+      </div>
+      {filteredTasks.length === 0 ? (
         <p className="empty"> No Tasks yet ⚡</p>
       ) : (
-        tasks.map((task) => (
+        filteredTasks.map((task) => (
           <div key={task.id} className="task">
             {editTextId === task.id ? (
               <>
@@ -119,7 +138,6 @@ export default function App() {
           </div>
         ))
       )}
-
       <div className="add-task">
         {/* Controlled Inputs  */}
         <input value={newTask} onChange={(e) => setNewTask(e.target.value)} />
