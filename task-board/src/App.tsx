@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
+import ThemeToggle from "./Component/ThemeToggle";
+import FilterToggle from "./Component/FilterToggle";
+import Counter from "./Component/Counter";
+import AddTask from "./Component/AddTask";
+import TaskItem from "./Component/TaskItem";
+
 import "./App.css";
 
-type Task = {
-  id: number;
-  title: string;
-  done: boolean;
-};
 export default function App() {
   {
     /* Display Tasks */
   }
+  type Task = {
+    id: number;
+    title: string;
+    done: boolean;
+  };
   const [tasks, setTask] = useState<Task[]>(() => {
     const saved = localStorage.getItem("tasks");
     return saved ? JSON.parse(saved) : [];
@@ -89,62 +95,35 @@ export default function App() {
   return (
     <div className="app">
       {/* Display Tasks */}
-      <button
-        className="theme-btn"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      >
-        {theme === "dark" ? "☀️ Light" : " 🌙 Dark"}
-      </button>
-      <h1>My Tasks</h1>
-      <p className="counter">
-        {tasks.length} Tasks . {tasks.filter((task) => task.done).length} Done
-      </p>
-      <div className="filter">
-        <button onClick={() => setFilter("all")}>All</button>
-        <button onClick={() => setFilter("active")}>Active</button>
-        <button onClick={() => setFilter("done")}>Done</button>
+      <div className="left-panel">
+        <h1>My Tasks</h1>
+        <Counter tasks={tasks}></Counter>
+        <FilterToggle filter={filter} setFilter={setFilter}></FilterToggle>
+        <ThemeToggle theme={theme} setTheme={setTheme}></ThemeToggle>
+        <AddTask
+          newTask={newTask}
+          setNewTask={setNewTask}
+          addTask={addTask}
+        ></AddTask>
       </div>
-      {filteredTasks.length === 0 ? (
-        <p className="empty"> No Tasks yet ⚡</p>
-      ) : (
-        filteredTasks.map((task) => (
-          <div key={task.id} className="task">
-            {editTextId === task.id ? (
-              <>
-                {/* Save Task */}
-                <input
-                  value={editText}
-                  onChange={(e) => setEditTask(e.target.value)}
-                />
-                <button onClick={saveEdit}>Save</button>
-              </>
-            ) : (
-              <>
-                <span
-                  onClick={() => toggleTask(task.id)}
-                  style={{
-                    textDecoration: task.done ? "line-through" : "none",
-                  }}
-                >
-                  {task.title}
-                </span>
-                {/* Delete A Task */}
-                <div className="task-buttons">
-                  <button onClick={() => deleteTask(task.id)}>Delete</button>
-                  <button onClick={() => startEdit(task)}>Edit</button>
-                </div>
-              </>
-            )}
-          </div>
-        ))
-      )}
-      <div className="add-task">
-        {/* Controlled Inputs  */}
-        <input value={newTask} onChange={(e) => setNewTask(e.target.value)} />
-        {/* Adding New Task */}
-        <button className="add-btn" onClick={addTask}>
-          Add
-        </button>
+      <div className="right-panel">
+        {filteredTasks.length === 0 ? (
+          <p className="empty"> No Tasks yet ⚡</p>
+        ) : (
+          filteredTasks.map((task) => (
+            <TaskItem
+              key={task.id}
+              task={task}
+              editTextId={editTextId}
+              editText={editText}
+              setEditTask={setEditTask}
+              saveEdit={saveEdit}
+              toggleTask={toggleTask}
+              deleteTask={deleteTask}
+              startEdit={startEdit}
+            ></TaskItem>
+          ))
+        )}
       </div>
     </div>
   );
