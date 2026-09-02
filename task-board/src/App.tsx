@@ -4,6 +4,7 @@ import FilterToggle from "./Component/FilterToggle";
 import Counter from "./Component/Counter";
 import AddTask from "./Component/AddTask";
 import TaskItem from "./Component/TaskItem";
+import type { Task } from "./types";
 
 import "./App.css";
 
@@ -11,11 +12,6 @@ export default function App() {
   {
     /* Display Tasks */
   }
-  type Task = {
-    id: number;
-    title: string;
-    done: boolean;
-  };
   const [tasks, setTask] = useState<Task[]>(() => {
     const saved = localStorage.getItem("tasks");
     return saved ? JSON.parse(saved) : [];
@@ -43,15 +39,18 @@ export default function App() {
     if (newTask.trim() === "") {
       return;
     }
-    setTask([...tasks, { id: Date.now(), title: newTask, done: false }]);
+    setTask((prevTask) => [
+      ...prevTask,
+      { id: Date.now(), title: newTask, done: false },
+    ]);
     setNewTask("");
   };
   const deleteTask = (idToDelete: number) => {
-    setTask(tasks.filter((task) => task.id !== idToDelete));
+    setTask((prevTask) => prevTask.filter((task) => task.id !== idToDelete));
   };
   const toggleTask = (idToToggle: number) => {
-    setTask(
-      tasks.map((task) =>
+    setTask((prevTask) =>
+      prevTask.map((task) =>
         task.id === idToToggle ? { ...task, done: !task.done } : task,
       ),
     );
@@ -65,8 +64,8 @@ export default function App() {
   };
   // Save a Task
   const saveEdit = () => {
-    setTask(
-      tasks.map((task) =>
+    setTask((prevTask) =>
+      prevTask.map((task) =>
         task.id === editTextId ? { ...task, title: editText } : task,
       ),
     );

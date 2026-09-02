@@ -1,8 +1,4 @@
-type Task = {
-  id: number;
-  title: string;
-  done: boolean;
-};
+import type { Task } from "../types";
 type CounterProps = {
   tasks: Task[];
 };
