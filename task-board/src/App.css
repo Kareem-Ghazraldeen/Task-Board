@@ -1,18 +1,18 @@
 /* General Styling Started */
 .dark {
-  --bg-color: #05070f;
-  --bg-task: #0a0f1e;
-  --accent: #38bdf8;
-  --text-color: #cfe8ff;
-  --border-color: #1e3a6e;
-  --addBtn-color: #05131f;
+  --bg-color: #18181b;
+  --bg-task: #27272a;
+  --accent: #f97316;
+  --text-color: #e4e4e7;
+  --border-color: #3f3f46;
+  --addBtn-color: #18181b;
 }
 .light {
   --bg-color: #ffffff;
-  --bg-task: #f8fafc;
-  --accent: #2563eb;
-  --text-color: #1e293b;
-  --border-color: #e2e8f0;
+  --bg-task: #fafafa;
+  --accent: #ea580c;
+  --text-color: #27272a;
+  --border-color: #e4e4e7;
   --addBtn-color: #ffffff;
 }
 
@@ -24,7 +24,7 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: "Rajdhani", monospace;
+  font-family: "Inter", sans-serif;
 }
 
 /* General Styling Ended */
@@ -40,7 +40,7 @@ body {
 }
 
 .task {
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   background-color: var(--bg-task);
   display: flex;
   align-items: center;
@@ -54,7 +54,6 @@ body {
 h1 {
   text-align: center;
   letter-spacing: 3px;
-  text-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
   border-bottom: 2px solid var(--accent);
   padding-bottom: 12px;
   padding-top: 40px;
@@ -69,13 +68,13 @@ button {
   padding: 5px;
   cursor: pointer;
   letter-spacing: 1px;
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+  box-shadow: none;
   transition: 0.2s;
 }
 button:hover {
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
-  background-color: rgba(56, 189, 248, 0.1);
-  color: var(--text-color);
+  box-shadow: none;
+  background-color: var(--accent);
+  color: var(--addBtn-color);
 }
 input {
   background-color: var(--bg-color);
@@ -99,12 +98,12 @@ input {
 .add-btn {
   background-color: var(--accent);
   color: var(--addBtn-color);
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+  box-shadow: none;
   font-weight: 600;
 }
 .active-filter {
   background-color: var(--accent);
   color: var(--addBtn-color);
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+  box-shadow: none;
 }
 /* Unit Styling Ended */
